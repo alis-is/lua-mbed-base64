@@ -29,6 +29,7 @@ l_mbed_base64_encode(lua_State* L) {
 
     int ret = mbedtls_base64_encode(dst, dlen, &olen, src, slen);
     if (ret != 0) {
+        free(dst);
         lua_pushnil(L);
         mbedtls_strerror(ret, error_buf, sizeof(error_buf));
         lua_pushstring(L, error_buf);
